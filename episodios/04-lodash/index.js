@@ -1,8 +1,17 @@
 'use strict';
+// require('clear').clear(); console.log('');
 
-const people = require('./people');
+const {
+    upperFirst,
+    truncate,
+    startCase,
+    lowerFirst,
+    snakeCase,
+    camelCase,
+    kebabCase,
+    capitalize
+} = require('lodash');
+let res;
 
-const {} = require('lodash');
-const {} = require('lodash/fp');
 
-console.log(people);
+res
