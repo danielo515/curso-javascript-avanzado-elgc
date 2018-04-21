@@ -4,8 +4,9 @@
   "description": "Una colección de ejemplos para el curso de javascript avanzado de el geek curioso",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-    ,"new-episode":"node ./bin/createEpisode.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "new-episode": "node ./bin/createEpisode.js",
+    "oraculo": "node ./bin/oraculo"
   },
   "keywords": [
     "tutorial",
@@ -21,6 +22,7 @@
   "dependencies": {
     "chalk": "^2.3.2",
     "clear": "^0.1.0",
-    "figlet": "^1.2.0"
+    "figlet": "^1.2.0",
+    "lodash": "^4.17.5"
   }
 }
