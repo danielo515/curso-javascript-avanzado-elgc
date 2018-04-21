@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-    ,"new-episode":"node bin/ceateEpisode.js"
+    ,"new-episode":"node ./bin/createEpisode.js"
   },
   "keywords": [
     "tutorial",

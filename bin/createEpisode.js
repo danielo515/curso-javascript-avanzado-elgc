@@ -10,7 +10,7 @@ const ch = require('chalk');
 const clear = require('clear');
 clear();console.log('');`
 
-const title = tit => `console.info(ch.red(fi.textSync(${tit})))`;
+const title = tit => `console.info(ch.red(fi.textSync('${tit}')))`;
 
 const episodePath = (...args) => resolve(__dirname, '..', 'episodios', ...args);
 
@@ -22,7 +22,7 @@ const maxEpisodeNumber = Math.max(...currentEpisodes
 
 const nextEpisodePrefix = (maxEpisodeNumber + 1).toString().padStart(2,'0');
 
-console.log(nextEpisodePrefix);
+console.log('This episode will bethe ' + nextEpisodePrefix + 'nth');
 
 const fileBody = [
     header, deps, title(epTitle)
@@ -32,3 +32,5 @@ const fullEpisodeName = `${nextEpisodePrefix}-${episodeName}`;
 mkdirSync(episodePath(fullEpisodeName));
 
 writeFileSync(episodePath(fullEpisodeName, 'index.js'), fileBody);
+
+console.info('Created ', fullEpisodeName);
