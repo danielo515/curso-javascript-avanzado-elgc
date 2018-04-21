@@ -24,5 +24,8 @@
     "clear": "^0.1.0",
     "figlet": "^1.2.0",
     "lodash": "^4.17.5"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0"
   }
 }
