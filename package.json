@@ -23,7 +23,8 @@
     "chalk": "^2.3.2",
     "clear": "^0.1.0",
     "figlet": "^1.2.0",
-    "lodash": "^4.17.5"
+    "lodash": "^4.17.5",
+    "prettier": "^1.12.1"
   },
   "devDependencies": {
     "faker": "^4.1.0"
