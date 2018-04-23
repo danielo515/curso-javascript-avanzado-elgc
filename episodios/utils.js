@@ -18,4 +18,4 @@ const makePeople = (n) => range(n).map(
     }));
 
 
-module.exports = { rand, makePeople }
+module.exports = { rand, makePeople, name }
