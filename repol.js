@@ -6,25 +6,52 @@ const { readFileSync, appendFileSync } = require('fs');
 const { resolve } = require('path');
 const { red, blue, bold, green, yellow } = require('chalk');
 const prettier = require('prettier');
-const util = require('util');
+const {inspect} = require('util');
 const repl = require('repl');
 const clear = require('clear');
 const prompt = red.bold('GEEK! > ');
 
+// ------ Context
 const replContext = {
-    __clear: clear
+    __clear: clear,
+    l: require('lodash'),
+    u: require('./episodios/utils')
 }
 
 const line = Array(5).fill('-').join('_');
+const filePath = resolve(process.argv[2] || 'repl_session.js');
 
-const filePath = resolve(process.argv[2]);
-appendFileSync(filePath, `\n// ${line} REPL SESSION STARTS HERE ${line}\n`);
+
+// ----- Utils
+
+const write = (code) => appendFileSync(filePath, prettier.format(code,{singleQuote: true}));
+
+// ----- COMMANDS
+
+const installCommands = (server) => {
+    server.defineCommand('def',
+        {
+            help: 'Creates a variable on the current file with the result of the executed command',
+            action(command){
+                this.clearBufferedCommand();
+                const ast = command.split('=');
+                const res = runInContext(ast[1], this.context);
+                write(`${ast[0]} = ${JSON.stringify(res)}`)
+                this.displayPrompt();
+            }
+        }
+    );
+}
+
+// ---- Initialization
+
+write(`\n// ${line} REPL SESSION STARTS HERE ${line}\n`);
 const fileContent = readFileSync(filePath,'utf8');
-
 const evalOptions = {
     filename: filePath,
     lineOffset: fileContent.split('\n').length
 };
+
 
 const autocompleteRegex = /^try { .* } catch \(e\) {}$/;
 const isAutoCompleteCmd = (x) => autocompleteRegex.test(x);
@@ -51,9 +78,9 @@ const customEval = (cmd, context, filename, callback) => {
     const output =
         result === undefined
             ? cmd
-            : `${cmd.trim()} /* ${util.inspect(result)} */\n`;
+            : `${cmd.trim()} /* ${inspect(result)} */\n`;
 
-    appendFileSync(filePath, prettier.format(output,{singleQuote: true}));
+    write(output);
 }
 
 const customWriter = (input) => {
@@ -77,11 +104,12 @@ const replServer = repl.start({
 //     }
 // })
 
+// ----- Context injection 
+Object.assign(replServer.context, replContext, { repol: replServer});
 runInContext(fileContent, replServer.context);
-
-Object.assign(replServer.context, replContext, {repol: replServer});
-
+installCommands(replServer);
 
 clear();
 console.info(blue.bold('\nWelcome sir'));
+console.info(green.bold('Functions on context: '),inspect(replContext, {depth: 0, colors: true}));
 replServer.prompt();
