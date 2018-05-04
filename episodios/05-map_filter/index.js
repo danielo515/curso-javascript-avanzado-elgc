@@ -10,9 +10,7 @@ const people = [
       startedAt: 2017,
       workingAt: 'Holy See (Vatican City State)',
       likings: { color: 'sky blue', programmingLanguage: 'Pascal' }
-    }
-  ],
-  [
+    },
     {
       name: 'Adeline',
       job: 'Orchestrator',
@@ -28,9 +26,7 @@ const people = [
       startedAt: 2018,
       workingAt: 'Poland',
       likings: { color: 'silver', programmingLanguage: 'PL/SQL' }
-    }
-  ],
-  [
+    },
     {
       name: 'Lavonne',
       job: 'Developer',
@@ -46,19 +42,25 @@ const people = [
       startedAt: 2018,
       workingAt: 'Gambia',
       likings: { color: 'turquoise', programmingLanguage: 'Assembly language' }
-    },
-    {
-      name: 'Nichole',
-      job: 'Supervisor',
-      age: 19,
-      startedAt: 2018,
-      workingAt: 'Saudi Arabia',
-      likings: { color: 'ivory', programmingLanguage: 'Javascript' },
     }
   ]
 ];
-const family = people.map( group => group.map( person => {
-    const randGroup = people[random(0,people.length -1)]
-    const randPerson = randGroup[random(0,randGroup.length -1)]
-    return Object.assign(person, {sibling: randPerson})
-}));
+
+
+
+const perros = [
+  {name:'Toby', raza: 'Pastor Alemán', age:1}
+  , {name:'Toto', raza: 'Salchicha', age: 3}
+  , {name:'Risky', raza: 'Galgo', age: 2}
+  , {name:'Pluma', raza: 'Galgo', age: 3}
+];
+
+
+
+
+const salchichas = [
+  {name:'Bierwurst', size: 22}
+  , {name:'Blutwurst', size: 44}
+  , {name:'Bockwurst', size: 34}
+  , {name:'Bratwurst', size: 14}
+];
