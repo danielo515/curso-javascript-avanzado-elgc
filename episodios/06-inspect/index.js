@@ -1,5 +1,5 @@
 'use strict';
-const { sample, random } = require('lodash');
+const { sample, random, assign } = require('lodash');
 // -_-_-_-_- REPL SESSION STARTS HERE -_-_-_-_-
 const people = [
   [
@@ -57,8 +57,27 @@ const people = [
     }
   ]
 ];
-const family = people.map( group => group.map( person => {
-    const randGroup = people[random(0,people.length -1)]
-    const randPerson = randGroup[random(0,randGroup.length -1)]
-    return Object.assign(person, {sibling: randPerson})
-}));
+// -_-_-_-_- REPL SESSION STARTS HERE -_-_-_-_-
+// const family = people.map( group => group.map( person => {
+//   const randGroup = people[random(0, people.length -1 )];
+//   const randGuy = randGroup[random(0, randGroup.length -1 )];
+//   return Object.assign(person, {sibling: randGuy });
+// }));
+
+
+const family = people.map( 
+  group => group.map( 
+    person => assign(person, {
+      sibling: sample(sample(people))
+    })
+  ));
+
+
+let Cosa = {
+  _mal: 99,
+  name: 'satan',
+  surname: 'blu',
+  inspect(){
+    return 'Cosa(' + this.name + ')';
+  }
+}
